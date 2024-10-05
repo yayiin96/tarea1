@@ -18,6 +18,7 @@
 \lstset{language=Python}
 \usepackage{tikz}
 \usepackage{circuitikz}
+\DeclareSIUnit{\angstrom}{\textup{\AA}}
 \DeclareGraphicsExtensions{.bmp,.png,.pdf,.jpg,.eps}
 \usepackage[spanish,activeacute]{babel}
 %M�rgenes
@@ -48,7 +49,10 @@
 \begin{@twocolumnfalse}
 \maketitle
 \begin{abstract}
-El objetivo de este experimento es estudiar la interacción de los átomos para una celda del gas noble Xenon, en el cual se analizara el comportamiento de la temperatura, energía cinética, energía potencial, distribución de átomos y el número de coordinación a través de simulaciones computacionales en el software Las Palmeras Molecular Dynamics (LPMD).
+El objetivo de este experimento es estudiar la interacción de los átomos para una celda del 
+gas noble Xenon, en el cual se analizara el comportamiento de la temperatura, energía cinética, 
+energía potencial, distribución de átomos y el número de coordinación a través de simulaciones 
+computacionales en el software Las Palmeras Molecular Dynamics (LPMD).
 
 \vspace{5mm}
 
@@ -57,9 +61,16 @@ El objetivo de este experimento es estudiar la interacción de los átomos para 
 \noindent\
 ]
 \section*{Introducción}
-El Xenón (Xe) es un elemento químico perteneciente al grupo de los gases nobles, con número atómico 54. Es un gas incoloro, inodoro, y no reactivo en condiciones normales, conocido por su estabilidad química y su baja reactividad debido a su configuración electrónica completa. A diferencia de otros gases nobles más ligeros como el helio, el xenón puede formar algunos compuestos en condiciones extremas debido a su mayor número de electrones y su capacidad para expandir su capa de valencia.
+El Xenón (Xe) es un elemento químico perteneciente al grupo de los gases nobles, con número 
+atómico 54. Es un gas incoloro, inodoro, y no reactivo en condiciones normales, conocido por 
+su estabilidad química y su baja reactividad debido a su configuración electrónica completa. 
+A diferencia de otros gases nobles más ligeros como el helio, el xenón puede formar algunos 
+compuestos en condiciones extremas debido a su mayor número de electrones y su capacidad para 
+expandir su capa de valencia.
 
-El Xenón cristaliza en estructuras cúbicas centradas en las caras (FCC) a bajas temperaturas, lo que significa que en estado sólido sus átomos están dispuestos en una red en la que cada átomo tiene 12 vecinos más cercanos, en una disposición de alta simetría y densidad empacada.
+El Xenón cristaliza en estructuras cúbicas centradas en las caras (FCC) a bajas temperaturas, 
+lo que significa que en estado sólido sus átomos están dispuestos en una red en la que cada 
+átomo tiene 12 vecinos más cercanos, en una disposición de alta simetría y densidad empacada.
 
 \begin{figure}[h!]
     \centering
@@ -68,23 +79,39 @@ El Xenón cristaliza en estructuras cúbicas centradas en las caras (FCC) a baja
     \caption{Estructura FCC}
 \end{figure}
 
-Para la construcción de la estructura cristalina del Xenón (Xe), también es necesario considerar 3 aristas y 3 ángulos que permiten formar su modelo estructural. En el caso del xenón en estado sólido, cristaliza en una estructura cúbica centrada en las caras (FCC), que se caracteriza por tener átomos en cada vértice del cubo y en el centro de cada una de sus caras.
+Para la construcción de la estructura cristalina del Xenón (Xe), también es necesario considerar 
+3 aristas y 3 ángulos que permiten formar su modelo estructural. En el caso del xenón en estado 
+sólido, cristaliza en una estructura cúbica centrada en las caras (FCC), que se caracteriza por 
+tener átomos en cada vértice del cubo y en el centro de cada una de sus caras.
 
-Las aristas a, b, y c corresponden a los lados del cubo que forman la red cúbica de alta simetría. En esta estructura, todos los ángulos \si{\alpha}, \si{\beta} y \si{\gamma} son de 90°, ya que la disposición cúbica implica ángulos rectos entre los ejes del cubo.
+Las aristas a, b, y c corresponden a los lados del cubo que forman la red cúbica de alta simetría. 
+En esta estructura, todos los ángulos \si{\alpha}, \si{\beta} y \si{\gamma} son de 90°, ya que la 
+disposición cúbica implica ángulos rectos entre los ejes del cubo.
 
-El radio atómico del xenón sólido en la red FCC es de aproximadamente 4.34 Å, lo que proporciona la distancia entre los centros de los átomos adyacentes. Esta disposición geométrica de alta densidad empaqueta los átomos de manera eficiente en tres dimensiones.
+El radio atómico del xenón sólido en la red FCC es de aproximadamente 4.34 Å, lo que proporciona la 
+distancia entre los centros de los átomos adyacentes. Esta disposición geométrica de alta densidad 
+empaqueta los átomos de manera eficiente en tres dimensiones.
 
-Una de las propiedades distintivas del xenón es su relativamente alto punto de ebullición comparado con otros gases nobles más ligeros. El xenón hierve a una temperatura de 165.03 K (-108.12 °C).
+Una de las propiedades distintivas del xenón es su relativamente alto punto de ebullición comparado 
+con otros gases nobles más ligeros. El xenón hierve a una temperatura de 165.03 K (-108.12 °C).
 
-Al ser un elemento en el cual se encuentra en temperaturas bajo el umbral de los $0^{\circ}C$, para lograr llegar al estado de solidificación es necesario que este gas se encuentre a una temperatura de $4K$, esta solidificación no se encuentra en situaciones comunes por lo
+Al ser un elemento en el cual se encuentra en temperaturas bajo el umbral de los $0^{\circ}C$, para 
+lograr llegar al estado de solidificación es necesario que este gas se encuentre a una temperatura 
+de $4K$, esta solidificación no se encuentra en situaciones comunes por lo
 que esta fase sería rara de formularse al no ser una estructura cristalina.
-Al existir una cantidad de átomos que interactúan entre ellos, es esencial hablar del potencial propuesto por Lennard Jones en 1924[3]. Este potencial describe la energía potencial del estado ligado de una molécula diatómica para una configuración electrónica dada, esta interacción viene dada mediante la siguiente ecuación:
+Al existir una cantidad de átomos que interactúan entre ellos, es esencial hablar del potencial 
+propuesto por Lennard Jones en 1924[3]. Este potencial describe la energía potencial del estado 
+ligado de una molécula diatómica para una configuración electrónica dada, esta interacción viene 
+dada mediante la siguiente ecuación:
 
 \begin{equation}
     U(r)=4\epsilon\left[\left(\dfrac{\sigma}{r}\right)^{12} - \left(\dfrac{\sigma}{r}\right)^{6}\right]
 \end{equation} 
 
-Donde $U(r)$ es la energía potencial intermolecular en función de la distancia de separación entre un par de moléculas, $\epsilon$ es la profundidad del pozo potencial en Joule y $\sigma$ es el valor finito de la distancia en Ángstroms $A$ en el cual el potencial entre partículas se vuelve cero.
+Donde $U(r)$ es la energía potencial intermolecular en función de la distancia de 
+separación entre un par de moléculas, $\epsilon$ es la profundidad del pozo potencial 
+en Joule y $\sigma$ es el valor finito de la distancia en Ángstroms $A$ en el cual el 
+potencial entre partículas se vuelve cero.
 Gracias a un artículo publicado el año 2013 por Seung-Kyo Oh, es posible
 obtener los parámetros del potencial de Lennard-Jones para los gases nobles
 mediante la siguiente tabla.
@@ -93,7 +120,7 @@ mediante la siguiente tabla.
 \centering % Centra horizontalmente la tabla
 \begin{tabular}{cccc}
 \toprule
-Group & $\sigma / A $& $(\epsilon/k_{B})/K$ & $\tau/K$ \\
+Group & $\sigma /$\AA & $(\epsilon/k_{B})/K$ & $\tau/K$ \\
 \midrule 
 Helium  & 2.628 & 5.465 & -0.836 \\
 Neon  & 2.775 & 36.831 & -2.468\\ 
@@ -107,12 +134,18 @@ Xenon & 4.055 & 218.18 & 13.09\\
 \label{tab:periodos_oscilacion}
 \end{table}
 
-Para continuar, es necesario hablar del efector de "Termalización", en un tiempo $t$ el ensamble adquiere una temperatura promedio estable y constante. 
+Para continuar, es necesario hablar del efector de "Termalización", en un tiempo $t$ el ensamble 
+adquiere una temperatura promedio estable y constante.
+
 \section*{Procedimiento}
 
-Este experimento se  realizó a través de una simulación utilizando el software LPMD, que corresponde a un codigo libre de dinámica molecular creado por S. Davis, C. Loyola, F. González y J. Peralta. Mediante este software se construyo una celda cristalina cubica compacta del elemento Xenon con un parametro de red de 24.52, es decir cuatro celdas unitarias en cada eje cartesiano. Para las interraciones de los átomos se ocupo el potencial de Lennard-Jones mediante el plugins $lennardjones$ .
+Este experimento se  realizó a través de una simulación utilizando el software LPMD, 
+que corresponde a un codigo libre de dinámica molecular creado por S. Davis, C. Loyola, F. González 
+y J. Peralta. Mediante este software se construyo una celda cristalina cubica compacta del elemento 
+Xenon con un parametro de red de 24.52, es decir cuatro celdas unitarias en cada eje cartesiano. 
+Para las interraciones de los átomos se ocupo el potencial de Lennard-Jones mediante el 
+plugins $lennardjones$.
 El codigo utilizado para este experimento es:
-
 
 \begin{lstlisting}
     cell cubic 24.52
@@ -128,7 +161,131 @@ El codigo utilizado para este experimento es:
         cutoff 15.3
 \end{lstlisting}
 
-Luego de realizar la simulación entrego un Xenon.dat en cual entrego información acerca de la energía cinetica, energía potencial, energía total y temperatura en función de los pasos realizados por la simulación. 
+Luego de realizar la simulación entrego un Xenon.dat en cual entrego información 
+acerca de la energía cinetica, energía potencial, energía total y temperatura en
+ función de los pasos realizados por la simulación. 
+
+Ademas, para poder analizar $g(r)$ que en la densidad de átomos en una simulación y numero de 
+coordinación se utilizo el comando $lpmd-analyzer$ cuyo codigo a ejecutar era:
+
+\begin{lstlisting}
+    cell cubic 24.52
+    use minimuimage
+        cutoff 15.3
+        debug none
+    enduse
+    usegdr
+        rcut 10.0
+        output gdr.dat
+        average true
+        debug none
+    enduse
+    
+    use cordnumfunc as cnf
+    bins 200
+    atoms 2 Xe
+    rcut 10
+    output cnf.dat
+    average true
+    enduse
+
+    property gdr
+    property cnf
+\end{lstlisting}
+ 
+Cuyos archivos grd.dat entrego una distribución de densidad y cnf.dat una distribución 
+acumulativa de sus proximos vecinos. Los cuales están a una 
+distancia $d_{1}=4.291$\AA , $d_{2}=6.13$\AA y $d_{3}=7.5$\AA.
+
+\section*{Analisis y Resultados}
+
+\subsection*{Energía}
+
+Usando el potencial de Lennard-Jones, la energía cinética interactúa con la energía 
+potencial (que se calcula a partir de las fuerzas intermoleculares entre átomos).
+ En cada paso de la simulación, la energía se transfiere entre cinética y potencial,
+  de acuerdo con las interacciones y colisiones entre los átomos.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.50]{energia1.png}
+	\caption{Energía Cinetica}.
+\end{figure}
+
+El potencial de Lennard-Jones modela la interacción entre átomos de Xenón a
+través de una combinación de fuerzas atractivas de van der Waals a largas
+distancias y repulsión fuerte a distancias cortas debido a la superposición
+de nubes electrónicas. Este potencial tiene un mínimo de energía en una distancia 
+de equilibrio, lo que representa la interacción más estable entre los átomos. Para 
+el Xenón, su profundidad $\epsilon$ es relativamente alta, debido a su mayor 
+polarizabilidad, lo que influye en sus propiedades macroscópicas como su punto 
+de ebullición y su estabilidad en fases líquidas.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.50]{energia2.png}
+	\caption{Energía Potencial}.
+\end{figure}
+
+La energía total del Xenón refleja el estado energético global del sistema, equilibrando 
+el movimiento de los átomos (energía cinética) y sus interacciones intermoleculares 
+(energía potencial). Dado que la energía total permanece constante, indica que no hay pérdidas 
+ni ganancias de energía externa.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.50]{energiat (4).png}
+	\caption{Energía Total}.
+\end{figure}
+
+\subsubsection*{Temperatura}
+
+A una temperatura promedio de 2K, el sistema ha alcanzado una temperatura extremadamente baja, 
+lo que implica que la energía cinética de los átomos de Xenón es mínima. En este rango de 
+temperatura, los átomos tienen muy poca energía térmica para moverse, lo que favorece un 
+estado sólido o cristalino.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.50]{temperatura (3).png}
+	\caption{Temperatura}.
+\end{figure}
+
+\subsection*{Distribución de pares}
+
+Dado que la geometría del Xenon es FCC, tiene distribuidos 4 átomos en la celda 
+unitaria. los peaks más altas son los átomos centrados en la cara, eso quiere decir 
+que tiene una mayor concentración de átomos que en sus aristas, los cuales son los 
+peaks mas bajos. 
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.50]{distribution (1).png}
+	\caption{Temperatura}.
+\end{figure}
+
+\subsection*{Numero de Coordinación}
+
+Tambien llamado ligancia de un átomo central en una molecula o cristal, es el número 
+de átomos, moléculas o iones unidos a él.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.50]{coordination number (1).png}
+	\caption{Numero de coordinación acumulativa}.
+\end{figure}
+
+En cuyo caso tiene 12 primeros vecinos a una distancia $d_{1}$, 6 a una distancia 
+$d_{2}$ y 24 a una distancia $d_{3}$, las cuales fueron descritas anteriormente.
+
+\subsection*{Conclusión}
+
+Podemos concluir que es un ensamble microcanónico como la energía total 
+es constante. Internamente la energía cinética y potencial varian, ya que las 
+partículas pueden intercambiar energía entre ellas debido a colisiones 
+o interacciones. Además el numero de coordinaciones nos confirma que el Xenon 
+tiene una estructura fcc, dado que a la distancia $d_{1}$ tiene 12 vecinos.
+
 
 \end{document}
 
