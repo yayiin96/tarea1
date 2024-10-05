@@ -1,6 +1,4 @@
-\documentclass{standalone}
-\usepackage{tikz} 
-\usetikzlibrary{3d,calc}
+\usetikzlibrary{3d,calc,backgrounds}
 
 \pgfdeclarefunctionalshading{sphere}{\pgfpoint{-25bp}{-25bp}}{\pgfpoint{25bp}{25bp}}{}{
 %% calculate unit coordinates
@@ -34,8 +32,6 @@ dup
 \definecolor{verde}{HTML}{adda79}
 \definecolor{naranjo}{HTML}{f38d70}
 
-
-\begin{document}
 \begin{tikzpicture}[line width=1pt]
 
   \pgfdeclarelayer{background}
@@ -85,4 +81,3 @@ dup
   \end{pgfonlayer}
 
 \end{tikzpicture}
-\end{document}

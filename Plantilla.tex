@@ -11,6 +11,8 @@
 \usepackage{multirow}
 \usepackage{tabularx} 
 \usepackage{url}
+\usepackage{caption}
+\captionsetup[figure]{skip=0pt} 
 \usepackage{siunitx} % Para habilitar el símbolo de ohmios (Ω)
 \usepackage{listings}
 \lstset{language=Python}
@@ -59,12 +61,12 @@ El Xenón (Xe) es un elemento químico perteneciente al grupo de los gases noble
 
 El Xenón cristaliza en estructuras cúbicas centradas en las caras (FCC) a bajas temperaturas, lo que significa que en estado sólido sus átomos están dispuestos en una red en la que cada átomo tiene 12 vecinos más cercanos, en una disposición de alta simetría y densidad empacada.
 
- \begin{figure}[h]
-     \centering
-     \includegraphics[width=0.3\linewidth]{FCCStructure.jpg}
-     \caption{Caption}
-     \label{fig:enter-label}
- \end{figure}
+\begin{figure}[h!]
+    \centering
+    \include{cubo}
+    \vspace*{-5mm}
+    \caption{Estructura FCC}
+\end{figure}
 
 Para la construcción de la estructura cristalina del Xenón (Xe), también es necesario considerar 3 aristas y 3 ángulos que permiten formar su modelo estructural. En el caso del xenón en estado sólido, cristaliza en una estructura cúbica centrada en las caras (FCC), que se caracteriza por tener átomos en cada vértice del cubo y en el centro de cada una de sus caras.
 
