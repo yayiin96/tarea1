@@ -12,6 +12,8 @@
 \usepackage{tabularx} 
 \usepackage{url}
 \usepackage{siunitx} % Para habilitar el símbolo de ohmios (Ω)
+\usepackage{listings}
+\lstset{language=Python}
 \usepackage{tikz}
 \usepackage{circuitikz}
 \DeclareGraphicsExtensions{.bmp,.png,.pdf,.jpg,.eps}
@@ -44,7 +46,7 @@
 \begin{@twocolumnfalse}
 \maketitle
 \begin{abstract}
-El objetivo de este experimento es estudiar la interacción de los átomos para una celda del gas noble Xenon, en el cual se analizara el comportamiento de la temperatura, energía cinética, energía potencial y el número de coordinación a través de simulaciones computacionales en el software Las Palmeras Molecular Dynamics (lpmd).
+El objetivo de este experimento es estudiar la interacción de los átomos para una celda del gas noble Xenon, en el cual se analizara el comportamiento de la temperatura, energía cinética, energía potencial, distribución de átomos y el número de coordinación a través de simulaciones computacionales en el software Las Palmeras Molecular Dynamics (LPMD).
 
 \vspace{5mm}
 
@@ -57,12 +59,12 @@ El Xenón (Xe) es un elemento químico perteneciente al grupo de los gases noble
 
 El Xenón cristaliza en estructuras cúbicas centradas en las caras (FCC) a bajas temperaturas, lo que significa que en estado sólido sus átomos están dispuestos en una red en la que cada átomo tiene 12 vecinos más cercanos, en una disposición de alta simetría y densidad empacada.
 
-% \begin{figure}[h]
-%     \centering
-%     \includegraphics[width=0.3\linewidth]{FCCStructure.jpg}
-%     \caption{Caption}
-%     \label{fig:enter-label}
-% \end{figure}
+ \begin{figure}[h]
+     \centering
+     \includegraphics[width=0.3\linewidth]{FCCStructure.jpg}
+     \caption{Caption}
+     \label{fig:enter-label}
+ \end{figure}
 
 Para la construcción de la estructura cristalina del Xenón (Xe), también es necesario considerar 3 aristas y 3 ángulos que permiten formar su modelo estructural. En el caso del xenón en estado sólido, cristaliza en una estructura cúbica centrada en las caras (FCC), que se caracteriza por tener átomos en cada vértice del cubo y en el centro de cada una de sus caras.
 
@@ -77,10 +79,10 @@ que esta fase sería rara de formularse al no ser una estructura cristalina.
 Al existir una cantidad de átomos que interactúan entre ellos, es esencial hablar del potencial propuesto por Lennard Jones en 1924[3]. Este potencial describe la energía potencial del estado ligado de una molécula diatómica para una configuración electrónica dada, esta interacción viene dada mediante la siguiente ecuación:
 
 \begin{equation}
-    U(r)=4\epsilon[(\dfrac{\sigma}{r})^{12} - (\dfrac{\sigma}{r})^{6}]
-\end{equation}
+    U(r)=4\epsilon\left[\left(\dfrac{\sigma}{r}\right)^{12} - \left(\dfrac{\sigma}{r}\right)^{6}\right]
+\end{equation} 
 
-Donde $U(r)$ es la energía potencial intermolecular en función de la distancia de separación entre un par de moléculas, $\epsilon$ es la profundidad del pozo potencial en Joule y $\sigma$ es el valor finito de la distancia en Ángstroms $\r{A}$ en el cual el potencial entre partículas se vuelve cero.
+Donde $U(r)$ es la energía potencial intermolecular en función de la distancia de separación entre un par de moléculas, $\epsilon$ es la profundidad del pozo potencial en Joule y $\sigma$ es el valor finito de la distancia en Ángstroms $A$ en el cual el potencial entre partículas se vuelve cero.
 Gracias a un artículo publicado el año 2013 por Seung-Kyo Oh, es posible
 obtener los parámetros del potencial de Lennard-Jones para los gases nobles
 mediante la siguiente tabla.
@@ -89,28 +91,42 @@ mediante la siguiente tabla.
 \centering % Centra horizontalmente la tabla
 \begin{tabular}{cccc}
 \toprule
-Gropu & $\sigma$\slash$\r{A}$ & $($\epsilon$ \slash $\k_{B})$ \\
+Group & $\sigma / A $& $(\epsilon/k_{B})/K$ & $\tau/K$ \\
 \midrule 
-1  & 1.43 \\
-2  & 1.33 \\
-3  & 1.45 \\
-4  & 1.50 \\
+Helium  & 2.628 & 5.465 & -0.836 \\
+Neon  & 2.775 & 36.831 & -2.468\\ 
+Argon  & 3.401 & 116.81 & 5.642\\
+Kripton  & 3.601 & 164.56 & 11.41\\
+Xenon & 4.055 & 218.18 & 13.09\\
 
 \bottomrule
 \end{tabular}
-\caption{Periodos de oscilación medidos}
+\caption{Parametros Lennar-Jones}
 \label{tab:periodos_oscilacion}
 \end{table}
 
-\section*{Información Relevante}
+Para continuar, es necesario hablar del efector de "Termalización", en un tiempo $t$ el ensamble adquiere una temperatura promedio estable y constante. 
+\section*{Procedimiento}
 
-Profesor : Carlos Curín Retamal \\
+Este experimento se  realizó a través de una simulación utilizando el software LPMD, que corresponde a un codigo libre de dinámica molecular creado por S. Davis, C. Loyola, F. González y J. Peralta. Mediante este software se construyo una celda cristalina cubica compacta del elemento Xenon con un parametro de red de 24.52, es decir cuatro celdas unitarias en cada eje cartesiano. Para las interraciones de los átomos se ocupo el potencial de Lennard-Jones mediante el plugins $lennardjones$ .
+El codigo utilizado para este experimento es:
 
-Nombre : José Luis Soto Pezoa\\
-correo : j.sotopezoa@uandresbello.edu
 
-Nombre : Felipe Halabi Alcayaga\\
-correo : f.halabialcayaga@uandresbello.edu
+\begin{lstlisting}
+    cell cubic 24.52
+    imput crystal3d type=fcc 
+          symbol=Xe nx=4 ny=4 nz=4
+    output xyz output.xyz each=10
+    steps 40000
+    start=0 end=-1 each=100 
+    prepare temperature =4.0
+    use lennardjones
+        sigma 4.05
+        epsilon 0.0188012
+        cutoff 15.3
+\end{lstlisting}
+
+Luego de realizar la simulación entrego un Xenon.dat en cual entrego información acerca de la energía cinetica, energía potencial, energía total y temperatura en función de los pasos realizados por la simulación. 
 
 \end{document}
 
