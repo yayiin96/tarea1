@@ -3,6 +3,13 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+%\usepackage{newtxtext,newtxmath}
+%\usepackage{mathpazo}
+\usepackage{kpfonts}
+%\usepackage[charter]{mathdesign}
+%\def\rmdefault{bch} % not scaled
+%\def\ttdefault{blg}
+\usepackage{inconsolata}
 \usepackage{graphicx}
 \usepackage{footnote}
 \usepackage{float}
@@ -13,9 +20,12 @@
 \usepackage{url}
 \usepackage{caption}
 \captionsetup[figure]{skip=0pt} 
+\captionsetup{belowskip=0pt}
 \usepackage{siunitx} % Para habilitar el símbolo de ohmios (Ω)
 \usepackage{listings}
 \lstset{language=Python}
+\lstset{basicstyle=\footnotesize\ttfamily,breaklines=true}
+\lstset{framextopmargin=50pt,frame=bottomline}
 \usepackage{tikz}
 \usepackage{circuitikz}
 \DeclareSIUnit{\angstrom}{\textup{\AA}}
@@ -140,12 +150,12 @@ adquiere una temperatura promedio estable y constante.
 \section*{Procedimiento}
 
 Este experimento se  realizó a través de una simulación utilizando el software LPMD, 
-que corresponde a un codigo libre de dinámica molecular creado por S. Davis, C. Loyola, F. González 
-y J. Peralta. Mediante este software se construyo una celda cristalina cubica compacta del elemento 
-Xenon con un parametro de red de 24.52, es decir cuatro celdas unitarias en cada eje cartesiano. 
-Para las interraciones de los átomos se ocupo el potencial de Lennard-Jones mediante el 
+que corresponde a un código libre de dinámica molecular creado por S. Davis, C. Loyola, F. González 
+y J. Peralta. Mediante este software se construyo una celda cristalina cúbica compacta del elemento 
+Xenon con un parámetro de red de 24.52, es decir cuatro celdas unitarias en cada eje cartesiano. 
+Para las interacciones de los átomos se ocupó el potencial de Lennard-Jones mediante el 
 plugins $lennardjones$.
-El codigo utilizado para este experimento es:
+El código utilizado para este experimento es:
 
 \begin{lstlisting}
     cell cubic 24.52
@@ -161,12 +171,12 @@ El codigo utilizado para este experimento es:
         cutoff 15.3
 \end{lstlisting}
 
-Luego de realizar la simulación entrego un Xenon.dat en cual entrego información 
-acerca de la energía cinetica, energía potencial, energía total y temperatura en
+Luego de realizar la simulación entrego un Xenon.dat en el cual entrego información 
+acerca de la energía cinética, energía potencial, energía total y temperatura en
  función de los pasos realizados por la simulación. 
 
-Ademas, para poder analizar $g(r)$ que en la densidad de átomos en una simulación y numero de 
-coordinación se utilizo el comando $lpmd-analyzer$ cuyo codigo a ejecutar era:
+Además, para poder analizar $g(r)$ que en la densidad de átomos en una simulación y número de 
+coordinación se utilizó el comando $lpmd-analyzer$ cuyo código a ejecutar era:
 
 \begin{lstlisting}
     cell cubic 24.52
@@ -194,7 +204,7 @@ coordinación se utilizo el comando $lpmd-analyzer$ cuyo codigo a ejecutar era:
 \end{lstlisting}
  
 Cuyos archivos grd.dat entrego una distribución de densidad y cnf.dat una distribución 
-acumulativa de sus proximos vecinos. Los cuales están a una 
+acumulativa de sus próximos vecinos. Los cuales están a una 
 distancia $d_{1}=4.291$\AA , $d_{2}=6.13$\AA y $d_{3}=7.5$\AA.
 
 \section*{Analisis y Resultados}
@@ -254,7 +264,7 @@ estado sólido o cristalino.
 \subsection*{Distribución de pares}
 
 Dado que la geometría del Xenon es FCC, tiene distribuidos 4 átomos en la celda 
-unitaria. los peaks más altas son los átomos centrados en la cara, eso quiere decir 
+unitaria. Los peaks más altos son los átomos centrados en la cara, eso quiere decir 
 que tiene una mayor concentración de átomos que en sus aristas, los cuales son los 
 peaks mas bajos. 
 
@@ -264,15 +274,15 @@ peaks mas bajos.
 	\caption{Temperatura}.
 \end{figure}
 
-\subsection*{Numero de Coordinación}
+\subsection*{Número de Coordinación}
 
-Tambien llamado ligancia de un átomo central en una molecula o cristal, es el número 
+También llamado ligancia de un átomo central en una molécula o cristal, es el número 
 de átomos, moléculas o iones unidos a él.
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.50]{coordination number (1).png}
-	\caption{Numero de coordinación acumulativa}.
+	\caption{Número de coordinación acumulativa}.
 \end{figure}
 
 En cuyo caso tiene 12 primeros vecinos a una distancia $d_{1}$, 6 a una distancia 
@@ -280,12 +290,12 @@ $d_{2}$ y 24 a una distancia $d_{3}$, las cuales fueron descritas anteriormente.
 
 \subsection*{Conclusión}
 
-Podemos concluir que es un ensamble microcanónico como la energía total 
-es constante. Internamente la energía cinética y potencial varian, ya que las 
-partículas pueden intercambiar energía entre ellas debido a colisiones 
-o interacciones. Además el numero de coordinaciones nos confirma que el Xenon 
-tiene una estructura fcc, dado que a la distancia $d_{1}$ tiene 12 vecinos.
-
+Podemos concluir que es un ensamble microcanónico, ya que, la energía total 
+es constante. Internamente, y debido a colisiones o interacciones entre las 
+partículas, varía tanto la energía cinética como la potencial. Además, 
+tenemos confirmación, por el número de coordinaciones, que el Xenon tiene
+una estructura tipo FCC, dado que nuestra arista de la celda unitaria está
+conectada a 12 vecinos a distancia $d_{1}$.
 
 \end{document}
 
