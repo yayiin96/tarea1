@@ -89,7 +89,7 @@ lo que significa que en estado sólido sus átomos están dispuestos en una red 
     \caption{Estructura FCC}
 \end{figure}
 
-Para la construcción de la estructura cristalina del Xenón (Xe), también es necesario considerar 
+Para la construcción de la estructura cristalina del Xenón (Xe) \cite{}, también es necesario considerar 
 3 aristas y 3 ángulos que permiten formar su modelo estructural. En el caso del xenón en estado 
 sólido, cristaliza en una estructura cúbica centrada en las caras (FCC), que se caracteriza por 
 tener átomos en cada vértice del cubo y en el centro de cada una de sus caras.
@@ -153,8 +153,8 @@ Este experimento se  realizó a través de una simulación utilizando el softwar
 que corresponde a un código libre de dinámica molecular creado por S. Davis, C. Loyola, F. González 
 y J. Peralta. Mediante este software se construyo una celda cristalina cúbica compacta del elemento 
 Xenon con un parámetro de red de 24.52, es decir cuatro celdas unitarias en cada eje cartesiano. 
-Para las interacciones de los átomos se ocupó el potencial de Lennard-Jones mediante el 
-plugins $lennardjones$.
+Para las interacciones de los átomos se ocupó el potencial de Lennard-Jones mediante la 
+extensión $lennardjones$.
 El código utilizado para este experimento es:
 
 \begin{lstlisting}
@@ -207,7 +207,7 @@ Cuyos archivos grd.dat entrego una distribución de densidad y cnf.dat una distr
 acumulativa de sus próximos vecinos. Los cuales están a una 
 distancia $d_{1}=4.291$\AA , $d_{2}=6.13$\AA y $d_{3}=7.5$\AA.
 
-\section*{Analisis y Resultados}
+\section*{Análisis y Resultados}
 
 \subsection*{Energía}
 
@@ -219,7 +219,7 @@ potencial (que se calcula a partir de las fuerzas intermoleculares entre átomos
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.50]{energia1.png}
-	\caption{Energía Cinetica}.
+	\caption{Energía Cinética}.
 \end{figure}
 
 El potencial de Lennard-Jones modela la interacción entre átomos de Xenón a
@@ -266,12 +266,12 @@ estado sólido o cristalino.
 Dado que la geometría del Xenon es FCC, tiene distribuidos 4 átomos en la celda 
 unitaria. Los peaks más altos son los átomos centrados en la cara, eso quiere decir 
 que tiene una mayor concentración de átomos que en sus aristas, los cuales son los 
-peaks mas bajos. 
+peaks más bajos. 
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.50]{distribution (1).png}
-	\caption{Temperatura}.
+	\caption{Distribución}.
 \end{figure}
 
 \subsection*{Número de Coordinación}
@@ -296,6 +296,20 @@ partículas, varía tanto la energía cinética como la potencial. Además,
 tenemos confirmación, por el número de coordinaciones, que el Xenon tiene
 una estructura tipo FCC, dado que nuestra arista de la celda unitaria está
 conectada a 12 vecinos a distancia $d_{1}$.
+
+\subsection*{Referencias}
+
+[1] Eni Generalic Faculty Of Chemistry Croatia and Split Technology. Helio
+- ENIG. Tabla Periódica de los elementos. url: https://www.periodni.
+com/es/he.html.
+
+[2] Charles Kittle. lntroduction to Solid State Physic. 8th ed.
+
+[3] “Modified Lennard-Jones Potentials with a Reduced Temperature-Correction
+Parameter for Calculating Thermodynamic and Transport Properties: Noble 
+Gases and Their Mixtures (He, Ne, Ar, Kr, and Xe)”. In: 2013 ().
+
+[4] Las Palmeras Molecular Dynamics. url: https://www.lpmd.cl/.
 
 \end{document}
 
